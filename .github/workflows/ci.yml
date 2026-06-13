@@ -6,10 +6,12 @@ on:
       - develop
 
 jobs:
-  build:
+  build-and-push:
+
     runs-on: ubuntu-latest
 
     steps:
+
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -20,10 +22,15 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build Image
-        run: docker build -t taskflow .
+        run: |
+          docker build -t taskflow .
 
       - name: Tag Image
-        run: docker tag taskflow ${{ secrets.DOCKERHUB_USERNAME }}/taskflow-cicd:latest
+        run: |
+          docker tag taskflow \
+          ${{ secrets.DOCKERHUB_USERNAME }}/taskflow-cicd:latest
 
       - name: Push Image
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/taskflow-cicd:latest
+        run: |
+          docker push \
+          ${{ secrets.DOCKERHUB_USERNAME }}/taskflow-cicd:latest

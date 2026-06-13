@@ -6,17 +6,23 @@ on:
       - develop
 
 jobs:
+
   deploy:
+
     runs-on: ubuntu-latest
+
     environment: development
 
     steps:
+
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Deploy to Render
         run: |
-          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+          curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK_URL }}"
 
-      - name: Confirm
-        run: echo "Deployment successful"
+      - name: Confirm Deployment
+        run: |
+          echo "Deployment Completed"
+          date
