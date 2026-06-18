@@ -18,11 +18,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Deploy to Render
+      - name: Deploy
         run: |
           curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK_URL }}"
 
-      - name: Confirm Deployment
+      - name: Confirm
         run: |
-          echo "Deployment Completed"
-          date
+          echo "Deployment completed"
